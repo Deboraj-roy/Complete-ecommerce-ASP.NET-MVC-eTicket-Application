@@ -12,9 +12,9 @@ namespace eTicket.Controllers
         {
             _context = context;
         }
-        public async IActionResult Index()
+        public IActionResult Index()
         {
-            var allProducers = await _context.Producers.ToListAsync();
+            //var allProducers = await _context.Producers.ToListAsync();
             return View();
         }
     }

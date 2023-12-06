@@ -13,9 +13,9 @@ namespace eTicket.Controllers
             _context = context;
         }
 
-        public async IActionResult Index()
+        public IActionResult Index()
         {
-            var allCinemas = await _context.Cinemas.ToListAsync();
+            //var allCinemas = await _context.Cinemas.ToListAsync();
             return View();
         }
     }
