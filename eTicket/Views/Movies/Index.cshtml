@@ -1,7 +1,7 @@
-﻿@model IEnumerable<Cinema>
+﻿@model IEnumerable<Movie>
 
 @{
-    ViewData["Title"] = "List of Cinemas";
+    ViewData["Title"] = "List of Movies";
 }
 
 <div class="row">
@@ -9,10 +9,9 @@
         <table class="table">
             <thead>
                 <tr class="text-center">
-                    <th>@Html.DisplayNameFor(Model => Model.Logo)</th>
+                    <th>@Html.DisplayNameFor(Model => Model.ImageURL)</th>
                     <th>@Html.DisplayNameFor(Model => Model.Name)</th>
                     <th>@Html.DisplayNameFor(Model => Model.Description)</th>
-                    <th>Actions</th>
                 </tr>
             </thead>
             <tbody>
@@ -20,7 +19,7 @@
                 {
                     <tr>
                         <td class="align-middle">
-                            <img class="rounded-circle" src="@item.Logo" alt="@item.Name" style="max-width: 150px" />
+                            <img class="rounded-circle" src="@item.ImageURL" alt="@item.Name" style="max-width: 150px" />
                         </td>
                         <td class="align-middle">
                             @Html.DisplayFor(modelItem => item.Name)
@@ -29,11 +28,6 @@
                             @Html.DisplayFor(modelItem => item.Description)
                         </td>
 
-                        <td class="align-middle">
-                            <a class="btn btn-outline-primary"><i class="bi bi-pencil-square"></i>Edit </a> |
-                            <a class="btn btn-outline-info"><i class="bi bi-eye"></i>Details </a> |
-                            <a class="btn btn-danger text-white"><i class="bi bi-trash"></i>Delete </a>
-                        </td>
                     </tr>
                 }
             </tbody>
