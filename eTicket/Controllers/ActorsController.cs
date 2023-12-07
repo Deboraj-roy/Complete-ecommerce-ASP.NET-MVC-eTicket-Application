@@ -8,10 +8,12 @@ namespace eTicket.Controllers
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;
+
         public ActorsController(IActorsService service)
-        { 
+        {
             _service = service;
         }
+
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
@@ -23,28 +25,52 @@ namespace eTicket.Controllers
         {
             return View();
         }
-         
+
         [HttpPost]
-        public async Task<IActionResult> Create([Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
+        public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
         {
+            /*
             if (!ModelState.IsValid)
             {
                 return View(actor);
-            }
-             await _service.AddAsync(actor);
+            }*/
+            await _service.AddAsync(actor);
             return RedirectToAction(nameof(Index));
         }
 
-        //Get: Actor/Details/1
+        //Get: Actors/Details/1
         public async Task<IActionResult> Details(int id)
         {
             var actorDetails = await _service.GetByIdAsync(id);
-            if (actorDetails == null)
-            {
-                return View("Empty");
-            }
+
+            if (actorDetails == null) return View("NotFound");
             return View(actorDetails);
         }
 
+        //Get: Actors/Edit/1
+        public async Task<IActionResult> Edit(int id)
+        {
+            var actorDetails = await _service.GetByIdAsync(id);
+            if (actorDetails == null) return View("NotFound");
+            return View(actorDetails);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
+        {
+            /* if (!ModelState.IsValid)
+             {
+                 var errors = ModelState.Values.SelectMany(v => v.Errors);
+                 // Log or debug the errors
+                 return View(actor);
+             }*/
+
+            if (!ModelState.IsValid)
+            {
+                await _service.UpdateAsync(id, actor);
+                return RedirectToAction(nameof(Index));
+            }
+            return View(actor);
+        }
     }
 }
