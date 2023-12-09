@@ -52,6 +52,6 @@ Contributions to the project are welcome! If you have any ideas, improvements, o
 
 ## License
 
-This project is licensed under the [MIT LICENSE.txt](LICENSE). Feel free to use the code as a reference or for your own projects.
+This project is licensed under the [MIT LICENSE](LICENSE.txt). Feel free to use the code as a reference or for your own projects.
 
 Thank you for checking out the eTicket ASP.NET MVC project. Happy coding!
