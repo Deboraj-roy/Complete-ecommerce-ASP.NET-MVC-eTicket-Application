@@ -29,8 +29,7 @@ namespace eTicket.Controllers
         [HttpPost]
         public async Task<IActionResult> Create([Bind("FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-/*
-            if (!ModelState.IsValid)
+           /* if (!ModelState.IsValid)
             {
                 return View(actor);
             }*/
@@ -58,21 +57,13 @@ namespace eTicket.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,FullName,ProfilePictureURL,Bio")] Actor actor)
         {
-            /* if (!ModelState.IsValid)
-             {
-                 var errors = ModelState.Values.SelectMany(v => v.Errors);
-                 // Log or debug the errors
-                 return View(actor);
-             }*/
-/*
-            if (!ModelState.IsValid)
+           /* if (!ModelState.IsValid)
             {
                 return View(actor);
             }*/
             await _service.UpdateAsync(id, actor);
             return RedirectToAction(nameof(Index));
         }
-
 
         //Get: Actors/Delete/1
         public async Task<IActionResult> Delete(int id)

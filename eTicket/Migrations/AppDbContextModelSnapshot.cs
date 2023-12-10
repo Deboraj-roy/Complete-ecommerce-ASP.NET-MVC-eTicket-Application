@@ -36,7 +36,8 @@ namespace eTicket.Migrations
 
                     b.Property<string>("FullName")
                         .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                        .HasMaxLength(50)
+                        .HasColumnType("nvarchar(50)");
 
                     b.Property<string>("ProfilePictureURL")
                         .IsRequired()
@@ -59,7 +60,7 @@ namespace eTicket.Migrations
 
                     b.HasIndex("MovieId");
 
-                    b.ToTable("Actor_Movies");
+                    b.ToTable("Actors_Movies");
                 });
 
             modelBuilder.Entity("eTicket.Models.Cinema", b =>
@@ -162,13 +163,13 @@ namespace eTicket.Migrations
             modelBuilder.Entity("eTicket.Models.Actor_Movie", b =>
                 {
                     b.HasOne("eTicket.Models.Actor", "Actor")
-                        .WithMany("Actor_Movies")
+                        .WithMany("Actors_Movies")
                         .HasForeignKey("ActorId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
                     b.HasOne("eTicket.Models.Movie", "Movie")
-                        .WithMany("Actor_Movies")
+                        .WithMany("Actors_Movies")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
@@ -199,7 +200,7 @@ namespace eTicket.Migrations
 
             modelBuilder.Entity("eTicket.Models.Actor", b =>
                 {
-                    b.Navigation("Actor_Movies");
+                    b.Navigation("Actors_Movies");
                 });
 
             modelBuilder.Entity("eTicket.Models.Cinema", b =>
@@ -209,7 +210,7 @@ namespace eTicket.Migrations
 
             modelBuilder.Entity("eTicket.Models.Movie", b =>
                 {
-                    b.Navigation("Actor_Movies");
+                    b.Navigation("Actors_Movies");
                 });
 
             modelBuilder.Entity("eTicket.Models.Producer", b =>

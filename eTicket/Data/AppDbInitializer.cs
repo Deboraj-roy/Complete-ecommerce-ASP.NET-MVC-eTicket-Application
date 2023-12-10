@@ -10,12 +10,12 @@ namespace eTicket.Data
             using (var serviceScope = applicationBuilder.ApplicationServices.CreateScope())
             {
                 var context = serviceScope.ServiceProvider.GetService<AppDbContext>();
+
                 context.Database.EnsureCreated();
 
                 //Cinema
                 if (!context.Cinemas.Any())
                 {
-
                     context.Cinemas.AddRange(new List<Cinema>()
                     {
                         new Cinema()
@@ -210,9 +210,9 @@ namespace eTicket.Data
                     context.SaveChanges();
                 }
                 //Actors & Movies
-                if (!context.Actor_Movies.Any())
+                if (!context.Actors_Movies.Any())
                 {
-                    context.Actor_Movies.AddRange(new List<Actor_Movie>()
+                    context.Actors_Movies.AddRange(new List<Actor_Movie>()
                     {
                         new Actor_Movie()
                         {
@@ -310,8 +310,8 @@ namespace eTicket.Data
                     });
                     context.SaveChanges();
                 }
-
             }
+
         }
     }
 }
