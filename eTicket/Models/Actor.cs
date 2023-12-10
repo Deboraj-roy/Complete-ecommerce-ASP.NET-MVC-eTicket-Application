@@ -1,8 +1,9 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using eTicket.Data.Base;
+using System.ComponentModel.DataAnnotations;
 
 namespace eTicket.Models
 {
-    public class Actor
+    public class Actor : IEntityBase
     {
         [Key]
         public int Id { get; set; }
@@ -21,6 +22,6 @@ namespace eTicket.Models
         public string Bio { get; set; }
 
         //Relationships
-        public List<Actor_Movie> Actors_Movies { get; set; }
+       // public List<Actor_Movie> Actors_Movies { get; set; }
     }
 }
