@@ -31,9 +31,11 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData["success"] = "Actor not created, try again!";
                 return View(actor);
             }
             await _service.AddAsync(actor);
+            TempData["success"] = "Actor Created Successfully";
             return RedirectToAction(nameof(Index));
         }
 
@@ -59,9 +61,12 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid)
             {
+                TempData["success"] = "Actor not updated, Try again! ";
                 return View(actor);
             }
             await _service.UpdateAsync(id, actor);
+
+            TempData["success"] = "Actor Update Successfully ";
             return RedirectToAction(nameof(Index));
         }
 
@@ -80,6 +85,8 @@ namespace eTicket.Controllers
             if (actorDetails == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
+             
+            TempData["warning"] = "Actor Delete Successfully  ";
             return RedirectToAction(nameof(Index));
         }
     }

@@ -33,8 +33,12 @@ namespace eTicket.Controllers
             if (ModelState.IsValid)
             {
                 await _service.AddAsync(cinema);
+
+                TempData["success"] = "Cinema Created Successfully ";
                 return RedirectToAction(nameof(Index));
             }
+
+            TempData["success"] = "Cinema Not Created, Try again ";
             return View(cinema);
         }
 
@@ -59,6 +63,8 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid) return View(cinema);
             await _service.UpdateAsync(id, cinema);
+
+            TempData["success"] = "Cinema Updated Successfully  ";
             return RedirectToAction(nameof(Index));
         }
 
@@ -77,6 +83,8 @@ namespace eTicket.Controllers
             if (cinemaDetails == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
+
+            TempData["warning"] = "Cinema Delete Successfully  ";
             return RedirectToAction(nameof(Index));
         }
     }

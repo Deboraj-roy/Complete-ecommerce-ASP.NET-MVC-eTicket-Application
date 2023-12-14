@@ -39,6 +39,7 @@ namespace eTicket.Controllers
             if (!ModelState.IsValid) return View(producer);
 
             await _service.AddAsync(producer);
+            TempData["success"] = "Producer Created Successfully  ";
             return RedirectToAction(nameof(Index));
         }
 
@@ -59,6 +60,8 @@ namespace eTicket.Controllers
             if(id == producer.Id)
             {
                 await _service.UpdateAsync(id,producer);
+
+                TempData["success"] = "Producer Updated Successfully  ";
                 return RedirectToAction(nameof(Index));
             }
             return View(producer);
@@ -78,6 +81,8 @@ namespace eTicket.Controllers
             var producerDetails = await _service.GetByIdAsync(id);
             if (producerDetails == null) return View("NotFound");
             await _service.DeleteAsync(id);
+
+            TempData["warning"] = "Producer Delete Successfully  ";
             return RedirectToAction(nameof(Index));
         }
 
