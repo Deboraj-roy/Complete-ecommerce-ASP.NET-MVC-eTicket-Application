@@ -16,9 +16,35 @@ namespace eTicket.Controllers
             _service = service;
         }
         public async Task<IActionResult> Index()
-        {
+        { 
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             return View(allMovies);
+        }
+
+        public async Task<IActionResult> Filter(string searchString)
+        { 
+            var allMovies = await _service.GetAllAsync(n => n.Cinema);
+            if (!string.IsNullOrEmpty(searchString))
+            {
+                var filteredResult = allMovies.Where(n => n.Name.Contains(searchString)
+                || n.Description.Contains(searchString)).ToList();
+
+                if (filteredResult.Count == 0)
+                {
+                    //Redirect to Coustom 404 page for filtering
+
+                    return RedirectToAction("FilterNotFound");
+
+                }
+                return View("Index", filteredResult);
+            }
+            return View("Index", allMovies);
+        }
+
+        public IActionResult FilterNotFound()
+        {
+            // You can customize this action to display your custom 404 page for filtering
+            return View("FilterNotFound");
         }
 
         //GET: Movies/Details/1
