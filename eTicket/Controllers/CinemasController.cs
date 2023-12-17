@@ -38,7 +38,7 @@ namespace eTicket.Controllers
                 return RedirectToAction(nameof(Index));
             }
 
-            TempData["success"] = "Cinema Not Created, Try again ";
+            TempData["warning"] = "Cinema Not Created, Try again ";
             return View(cinema);
         }
 

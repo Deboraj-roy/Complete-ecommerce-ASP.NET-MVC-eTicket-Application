@@ -31,7 +31,7 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["success"] = "Actor not created, try again!";
+                TempData["warning"] = "Actor not created, try again!";
                 return View(actor);
             }
             await _service.AddAsync(actor);
@@ -61,7 +61,7 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["success"] = "Actor not updated, Try again! ";
+                TempData["warning"] = "Actor not updated, Try again! ";
                 return View(actor);
             }
             await _service.UpdateAsync(id, actor);
