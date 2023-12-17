@@ -31,11 +31,11 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid)
             {
-                TempData["warning"] = "Actor not created, try again!";
+                TempData["warning"] = "Actor not Added, try again!";
                 return View(actor);
             }
             await _service.AddAsync(actor);
-            TempData["success"] = "Actor Created Successfully";
+            TempData["success"] = "Actor Added Successfully";
             return RedirectToAction(nameof(Index));
         }
 

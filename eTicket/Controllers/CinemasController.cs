@@ -61,7 +61,12 @@ namespace eTicket.Controllers
         [HttpPost]
         public async Task<IActionResult> Edit(int id, [Bind("Id,Logo,Name,Description")] Cinema cinema)
         {
-            if (!ModelState.IsValid) return View(cinema);
+            if (!ModelState.IsValid)
+            {
+                TempData["warning"] = "Cinema not updated, Try again! ";
+                return View(cinema);
+            }
+
             await _service.UpdateAsync(id, cinema);
 
             TempData["success"] = "Cinema Updated Successfully  ";
