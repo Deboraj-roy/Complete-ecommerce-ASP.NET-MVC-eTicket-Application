@@ -33,20 +33,23 @@ namespace eTicket.Controllers
                 {
                     //Redirect to Coustom 404 page for filtering
 
-                    return RedirectToAction("FilterNotFound");
+                    //return RedirectToAction("FilterNotFound");
+
+                    return View("FilterNotFound");
+                    //return View("NotFound");
 
                 }
                 return View("Index", filteredResult);
             }
             return View("Index", allMovies);
         }
-
+/*
         public IActionResult FilterNotFound()
         {
             // You can customize this action to display your custom 404 page for filtering
             return View("FilterNotFound");
         }
-
+*/
         //GET: Movies/Details/1
         public async Task<IActionResult> Details(int id)
         {
