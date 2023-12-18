@@ -11,6 +11,7 @@
         </p> 
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-8 offset-2">
         <div class="card mb-12">
@@ -30,7 +31,18 @@
                 <div class="col-md-8">
                     <div class="card-body">
                         <p class="card-text">@Model.Description</p>
-                       
+                        <p class="card-text">
+                            <b>Cinema: </b>
+                            <a asp-controller="Cinemas" asp-action="Details" asp-route-id="@Model.CinemaId">
+                                @Model.Cinema.Name
+                            </a>
+                        </p>
+                        <p class="card-text">
+                            <b>Producer: </b>
+                            <a asp-controller="Producers" asp-action="Details" asp-route-id="@Model.ProducerId">
+                                @Model.Producer.FullName
+                            </a>
+                        </p>
                         <p class="card-text"><b>Category: </b>@Model.MovieCategory</p>
                         <p class="card-text"><b>Start Date: </b>@Model.StartDate.ToString("dd MMM yy")</p>
                         <p class="card-text"><b>End Date: </b>@Model.EndDate.ToString("dd MMM yy")</p>
@@ -49,17 +61,31 @@
                                 <span class="badge bg-primary text-white">UPCOMING</span>
                             }
                         </p>
+                        <p class="card-text">
+                            <b>Actors: </b>
+                            <hr />
+                            <div class="row">
+                                @foreach (var actor in Model.Actors_Movies)
+                                {
+                                    <div class="column text-center">
+                                        <img class="border-info rounded-circle" src="@actor.Actor.ProfilePictureURL" style="max-width: 150px" />
+                                        <br />
+                                        <a asp-controller="Actors" asp-action="Details" asp-route-id="@actor.ActorId">@actor.Actor.FullName</a>
+                                    </div>
+                                }
+                            </div>
+                        </p>
 
                     </div>
                 </div>
                 <div class="col-md-12">
-
                     <div class="form-group">
                         <form asp-action="Delete">
                             <input type="hidden" asp-for="Id" />
-                            <input type="submit" value="Confirm" class="btn btn-danger float-right" />
+                            <input type="submit" value="Confirm Delete" class="btn btn-danger float-left" />
                         </form>
-                        <a class="btn btn-outline-secondary" asp-action="Index">Show All</a>
+                        <a class="btn btn-outline-secondary float-right" asp-action="Index">Show All</a>
+
                     </div>
                 </div>
             </div>

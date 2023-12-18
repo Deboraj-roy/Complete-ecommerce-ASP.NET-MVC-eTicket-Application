@@ -152,7 +152,7 @@ namespace eTicket.Controllers
         //Get: Movies/Delete/1
         public async Task<IActionResult> Delete(int id)
         {
-            var MoviesDetails = await _service.GetByIdAsync(id);
+            var MoviesDetails = await _service.GetMovieByIdAsync(id);
             if (MoviesDetails == null) return View("NotFound");
             return View(MoviesDetails);
         }
@@ -160,7 +160,7 @@ namespace eTicket.Controllers
         [HttpPost, ActionName("Delete")]
         public async Task<IActionResult> DeleteConfirmed(int id)
         {
-            var MoviesDetails = await _service.GetByIdAsync(id);
+            var MoviesDetails = await _service.GetMovieByIdAsync(id);
             if (MoviesDetails == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
