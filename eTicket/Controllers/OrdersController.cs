@@ -9,16 +9,20 @@ namespace eTicket.Controllers
     {
         private readonly IMoviesService _moviesService;
         private readonly ShoppingCart _shoppingCart;
+        private readonly ILogger<OrdersController> _logger;
 
-        public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart)
+        public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart, ILogger<OrdersController> logger)
         { 
             _moviesService = moviesService;
             _shoppingCart = shoppingCart;
+            _logger = logger;
         }
         public IActionResult ShoppingCart()
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.shoppingCartItems = items;
+            
+            _logger.LogInformation("I am currently within the ShoppingCart action of the Orders Controller.");
 
             var response = new ShoppingCartVM()
             {

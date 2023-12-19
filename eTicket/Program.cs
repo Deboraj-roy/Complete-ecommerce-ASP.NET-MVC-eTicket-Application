@@ -2,8 +2,17 @@ using eTicket.Data;
 using eTicket.Data.Cart;
 using eTicket.Data.Services;
 using Microsoft.EntityFrameworkCore;
+using Serilog;
+using Serilog.Events;
 
 var builder = WebApplication.CreateBuilder(args);
+
+//Add logger (Serilog) 
+builder.Host.UseSerilog((ctx, lc) => lc
+    .MinimumLevel.Debug()
+    .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
+    .Enrich.FromLogContext()
+    .ReadFrom.Configuration(builder.Configuration));
 
 // Add services to the container.
 builder.Services.AddControllersWithViews();

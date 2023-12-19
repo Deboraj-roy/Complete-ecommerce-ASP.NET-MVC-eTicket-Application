@@ -9,14 +9,17 @@ namespace eTicket.Controllers
     public class CinemasController : Controller
     {
         private readonly ICinemaService _service;
+        private readonly ILogger<CinemasController> _logger;
 
-        public CinemasController(ICinemaService service)
+        public CinemasController(ICinemaService service, ILogger<CinemasController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
+            _logger.LogInformation("I am currently within the index action of the Cinemas Controller.");
             var allCinemas = await _service.GetAllAsync();
             return View(allCinemas);
         }

@@ -9,14 +9,17 @@ namespace eTicket.Controllers
     public class ProducersController : Controller
     {
         private readonly IProducersService _service;
+        private readonly ILogger<ProducersController> _logger;
 
-        public ProducersController(IProducersService service)
+        public ProducersController(IProducersService service, ILogger<ProducersController> logger)
         {
             _service = service;
+            _logger = logger;
         }
         public async Task<IActionResult> Index()
         {
             var allProducers = await _service.GetAllAsync();
+            _logger.LogInformation("I am currently within the Index action of the Producers Controller.");
             return View(allProducers);
         }
         //Get: Producers/Details/1

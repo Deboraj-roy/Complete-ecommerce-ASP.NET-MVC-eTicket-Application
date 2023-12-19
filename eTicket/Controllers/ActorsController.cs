@@ -8,15 +8,18 @@ namespace eTicket.Controllers
     public class ActorsController : Controller
     {
         private readonly IActorsService _service;
+        private readonly ILogger<ActorsController> _logger;
 
-        public ActorsController(IActorsService service)
+        public ActorsController(IActorsService service, ILogger<ActorsController> logger)
         {
             _service = service;
+            _logger = logger;
         }
 
         public async Task<IActionResult> Index()
         {
             var data = await _service.GetAllAsync();
+            _logger.LogInformation("I am currently within the index action of the Actors Controller.");
             return View(data);
         }
 
