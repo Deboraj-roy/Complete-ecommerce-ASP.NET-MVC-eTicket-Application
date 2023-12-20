@@ -13,7 +13,7 @@ namespace eTicket.Controllers
         private readonly IOrdersService _ordersService;
 
         public OrdersController(IMoviesService moviesService, ShoppingCart shoppingCart, ILogger<OrdersController> logger, IOrdersService ordersService)
-        { 
+        {
             _moviesService = moviesService;
             _shoppingCart = shoppingCart;
             _logger = logger;
@@ -23,7 +23,8 @@ namespace eTicket.Controllers
         public async Task<IActionResult> Index()
         {
             string userId = "";
-             
+            _logger.LogInformation("I am currently within the index action of the Orders Controller.");
+
             var orders = await _ordersService.GetOrderByUserIdAsync(userId);
             return View(orders);
         }
@@ -32,14 +33,14 @@ namespace eTicket.Controllers
         {
             var items = _shoppingCart.GetShoppingCartItems();
             _shoppingCart.shoppingCartItems = items;
-            
+
             _logger.LogInformation("I am currently within the ShoppingCart action of the Orders Controller.");
 
             var response = new ShoppingCartVM()
             {
                 ShoppingCart = _shoppingCart,
                 ShoppingCartTotal = _shoppingCart.GetShoppingCartTotal(),
-            }; 
+            };
 
             return View(response);
         }
@@ -51,6 +52,8 @@ namespace eTicket.Controllers
             {
                 _shoppingCart.AddItemToCart(item);
             }
+
+            _logger.LogInformation("Order added Successfully.");
             return RedirectToAction(nameof(ShoppingCart));
 
         }
@@ -60,12 +63,13 @@ namespace eTicket.Controllers
             var item = await _moviesService.GetMovieByIdAsync(id);
             if (item != null)
             {
+                _logger.LogInformation("Order remove Successfully.");
                 _shoppingCart.RemoveItemFromCart(item);
             }
             return RedirectToAction(nameof(ShoppingCart));
 
         }
-        
+
         public async Task<IActionResult> CompleteOrder()
         {
             var items = _shoppingCart.GetShoppingCartItems();
@@ -74,9 +78,10 @@ namespace eTicket.Controllers
 
             await _ordersService.StoreOrderAsync(items, userId, userEmailAddress);
             await _shoppingCart.ClearShoppingCartAsync();
-            
+            _logger.LogInformation("Order Completed Successfully.");
+
             return View("OrderCompleted");
-        } 
+        }
 
 
     }

@@ -41,9 +41,11 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _logger.LogInformation("Producer Added Failed.");
                 TempData["warning"] = "Producer not Added, Try again! ";
                 return View(producer);
             }
+            _logger.LogInformation("Producer Added Successfully.");
 
             await _service.AddAsync(producer);
             TempData["success"] = "Producer Added Successfully  ";
@@ -63,14 +65,15 @@ namespace eTicket.Controllers
         public async Task<IActionResult> Edit(int id, [Bind("Id,ProfilePictureURL, FullName,Bio")] Producer producer)
         {
             if (!ModelState.IsValid)
-            { 
+            {
                 TempData["warning"] = "Producer not updated, Try again! ";
                 return View(producer);
             }
 
-            if(id == producer.Id)
+            if (id == producer.Id)
             {
-                await _service.UpdateAsync(id,producer);
+                await _service.UpdateAsync(id, producer);
+                _logger.LogInformation("Producer Updated Successfully.");
 
                 TempData["success"] = "Producer Updated Successfully  ";
                 return RedirectToAction(nameof(Index));
@@ -92,6 +95,7 @@ namespace eTicket.Controllers
             var producerDetails = await _service.GetByIdAsync(id);
             if (producerDetails == null) return View("NotFound");
             await _service.DeleteAsync(id);
+            _logger.LogInformation("Producer Delete Successfully.");
 
             TempData["warning"] = "Producer Delete Successfully  ";
             return RedirectToAction(nameof(Index));

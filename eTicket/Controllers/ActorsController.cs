@@ -38,6 +38,7 @@ namespace eTicket.Controllers
                 return View(actor);
             }
             await _service.AddAsync(actor);
+            _logger.LogInformation("Actor Added Successfully.");
             TempData["success"] = "Actor Added Successfully";
             return RedirectToAction(nameof(Index));
         }
@@ -46,6 +47,7 @@ namespace eTicket.Controllers
         public async Task<IActionResult> Details(int id)
         {
             var actorDetails = await _service.GetByIdAsync(id);
+            _logger.LogInformation("Actor Details");
 
             if (actorDetails == null) return View("NotFound");
             return View(actorDetails);
@@ -68,6 +70,7 @@ namespace eTicket.Controllers
                 return View(actor);
             }
             await _service.UpdateAsync(id, actor);
+            _logger.LogInformation("Actor Update Successfully.");
 
             TempData["success"] = "Actor Update Successfully ";
             return RedirectToAction(nameof(Index));
@@ -88,7 +91,8 @@ namespace eTicket.Controllers
             if (actorDetails == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
-             
+            _logger.LogInformation("Actor Delete Successfully.");
+
             TempData["warning"] = "Actor Delete Successfully  ";
             return RedirectToAction(nameof(Index));
         }

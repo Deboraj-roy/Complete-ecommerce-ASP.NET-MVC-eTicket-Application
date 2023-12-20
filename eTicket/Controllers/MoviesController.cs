@@ -18,14 +18,14 @@ namespace eTicket.Controllers
             _logger = logger;
         }
         public async Task<IActionResult> Index()
-        { 
+        {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             _logger.LogInformation("I am currently within the index action of the Movies Controller.");
             return View(allMovies);
         }
 
         public async Task<IActionResult> Filter(string searchString)
-        { 
+        {
             var allMovies = await _service.GetAllAsync(n => n.Cinema);
             if (!string.IsNullOrEmpty(searchString))
             {
@@ -38,21 +38,18 @@ namespace eTicket.Controllers
 
                     //return RedirectToAction("FilterNotFound");
 
+                    _logger.LogInformation("Filter or Searching Not Found.");
                     return View("FilterNotFound");
                     //return View("NotFound");
 
                 }
+                _logger.LogInformation("Searching Movie.");
+
                 return View("Index", filteredResult);
             }
             return View("Index", allMovies);
         }
-/*
-        public IActionResult FilterNotFound()
-        {
-            // You can customize this action to display your custom 404 page for filtering
-            return View("FilterNotFound");
-        }
-*/
+
         //GET: Movies/Details/1
         public async Task<IActionResult> Details(int id)
         {
@@ -77,6 +74,8 @@ namespace eTicket.Controllers
         {
             if (!ModelState.IsValid)
             {
+                _logger.LogInformation("Movie Added Failed.");
+
                 TempData["warning"] = "Movie didn't added, Try Again!  ";
                 var movieDropdownsData = await _service.GetNewMovieDropdownsValuesAsync();
 
@@ -89,13 +88,14 @@ namespace eTicket.Controllers
             else
             {
                 await _service.AddNewMovieAsync(movie);
+                _logger.LogInformation("Movie Added Successfully.");
 
                 TempData["success"] = "Movie Added Successfully  ";
                 return RedirectToAction(nameof(Index));
             }
         }
-        
-        
+
+
         //GET: Movies/Edit/1
         public async Task<IActionResult> Edit(int id)
         {
@@ -133,6 +133,8 @@ namespace eTicket.Controllers
 
             if (!ModelState.IsValid)
             {
+                _logger.LogInformation("Movie Update Failed.");
+
                 TempData["warning"] = "Movie didn't Update, Try Again!  ";
                 var movieDropdownsData = await _service.GetNewMovieDropdownsValuesAsync();
 
@@ -145,6 +147,7 @@ namespace eTicket.Controllers
             else
             {
                 await _service.UpdateMovieAsync(movie);
+                _logger.LogInformation("Movie Update Successfully.");
 
                 TempData["success"] = "Movie Updated Successfully  ";
                 return RedirectToAction(nameof(Index));
@@ -167,6 +170,7 @@ namespace eTicket.Controllers
             if (MoviesDetails == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
+            _logger.LogInformation("Movie Delete Successfully.");
 
             TempData["warning"] = "Movie Delete Successfully  ";
             return RedirectToAction(nameof(Index));

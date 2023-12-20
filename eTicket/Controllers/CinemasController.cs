@@ -26,7 +26,7 @@ namespace eTicket.Controllers
 
         //Get: Cinemas/Create
         public IActionResult Create()
-        { 
+        {
             return View();
         }
 
@@ -36,6 +36,7 @@ namespace eTicket.Controllers
             if (ModelState.IsValid)
             {
                 await _service.AddAsync(cinema);
+                _logger.LogInformation("Cinema Created Successfully.");
 
                 TempData["success"] = "Cinema Created Successfully ";
                 return RedirectToAction(nameof(Index));
@@ -71,6 +72,7 @@ namespace eTicket.Controllers
             }
 
             await _service.UpdateAsync(id, cinema);
+            _logger.LogInformation("Cinema Updated Successfully.");
 
             TempData["success"] = "Cinema Updated Successfully  ";
             return RedirectToAction(nameof(Index));
@@ -91,6 +93,7 @@ namespace eTicket.Controllers
             if (cinemaDetails == null) return View("NotFound");
 
             await _service.DeleteAsync(id);
+            _logger.LogInformation("Cinema Delete Successfully.");
 
             TempData["warning"] = "Cinema Delete Successfully  ";
             return RedirectToAction(nameof(Index));
