@@ -1,4 +1,5 @@
-﻿using eTicket.Models;
+﻿using eTicket.Data.Services.IServices;
+using eTicket.Models;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Data.Services
