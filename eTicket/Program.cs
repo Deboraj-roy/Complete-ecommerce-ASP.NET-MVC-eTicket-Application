@@ -14,42 +14,54 @@ builder.Host.UseSerilog((ctx, lc) => lc
     .MinimumLevel.Override("Microsoft", LogEventLevel.Warning)
     .Enrich.FromLogContext()
     .ReadFrom.Configuration(builder.Configuration));
+try
+{
+    // Add services to the container.
+    builder.Services.AddControllersWithViews();
+    // Database configure
+    builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
 
-// Add services to the container.
-builder.Services.AddControllersWithViews();
-// Database configure
-builder.Services.AddDbContext<AppDbContext>(options => options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnectionString")));
+    //Configure Services Dependency Injections
+    builder.Services.AddScoped<IActorsService, ActorsService>();
+    builder.Services.AddScoped<IProducersService, ProducersService>();
+    builder.Services.AddScoped<ICinemaService, CinemaService>();
+    builder.Services.AddScoped<IMoviesService, MoviesService>();
+    builder.Services.AddScoped<IOrdersService, OrdersService>();
 
-//Configure Services Dependency Injections
-builder.Services.AddScoped<IActorsService, ActorsService>();
-builder.Services.AddScoped<IProducersService, ProducersService>();
-builder.Services.AddScoped<ICinemaService, CinemaService>();
-builder.Services.AddScoped<IMoviesService, MoviesService>();
-builder.Services.AddScoped<IOrdersService, OrdersService>();
+    builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+    builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
-builder.Services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
+    builder.Services.AddSession();
 
-builder.Services.AddSession();
+    builder.Services.AddControllersWithViews();
 
-builder.Services.AddControllersWithViews();
-
-var app = builder.Build();
+    var app = builder.Build();
 
 
-app.UseHttpsRedirection();
-app.UseStaticFiles();
+    app.UseHttpsRedirection();
+    app.UseStaticFiles();
 
-app.UseRouting();
-app.UseSession();
+    app.UseRouting();
+    app.UseSession();
 
-app.UseAuthorization();
+    app.UseAuthorization();
 
-app.MapControllerRoute(
-    name: "default",
-    pattern: "{controller=Movies}/{action=Index}/{id?}");
+    app.MapControllerRoute(
+        name: "default",
+        pattern: "{controller=Movies}/{action=Index}/{id?}");
 
-//Seed Database
-AppDbInitializer.Seed(app);
+    //Seed Database
+    AppDbInitializer.Seed(app);
 
-app.Run();
+    app.Run();
+
+    Log.Information("Application Starting...");
+}
+catch (Exception ex)
+{
+    Log.Fatal(ex, "Failed to start application.");
+}
+finally
+{
+    Log.CloseAndFlush();
+}
