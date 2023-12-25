@@ -22,20 +22,20 @@
                 </tr>
             </thead>
             <tbody>
-                 @foreach (var item in Model.ShoppingCart.shoppingCartItems)
+                @foreach (var item in Model.ShoppingCart.shoppingCartItems)
                 {
                     <tr>
                         <td class="align-middle">@item.Amount</td>
                         <td class="align-middle">@item.Movie.Name</td>
                         <td class="align-middle">@item.Movie.Price.ToString("c")</td>
-                        <td class="align-middle">@((item.Amount*item.Movie.Price).ToString("c"))</td>
+                        <td class="align-middle">@((item.Amount * item.Movie.Price).ToString("c"))</td>
                         <td class="align-middle">
                             <a class="text-danger" asp-controller="Orders" asp-action="RemoveItemFromShoppingCart" asp-route-id="@item.Movie.Id">
                                 <i class="bi bi-cart-dash"></i>
                             </a>
                             |
                             <a class="text-success" asp-controller="Orders" asp-action="AddItemToShoppingCart" asp-route-id="@item.Movie.Id">
-                                <i class="bi bi-cart-plus"></i> 
+                                <i class="bi bi-cart-plus"></i>
                             </a>
                         </td>
                     </tr>
@@ -56,7 +56,7 @@
         <div class="text-right">
             <div class="btn-group">
                 @* <a class="btn btn-outline-primary" asp-action="CompleteOrder">
-                    Complete order
+                Complete order
                 </a> *@
                 <div id="paypal-btn"></div>
                 <span style="padding:5px"></span>
@@ -68,7 +68,7 @@
 
     </div>
 </div>
-@section Scripts{
+@section Scripts {
 
     <script src="https://www.paypalobjects.com/api/checkout.js"></script>
     <script>
@@ -102,12 +102,15 @@
                         }
                     }]
                 });
-                         
+
             },
 
             //Excute the payment
             onAuthorize: function (data, actions) {
-                console.log("Payment executed.");
+                return actions.payment.execute().then(function () {
+                    var url = '@Url.Action("CompleteOrder", "Orders", new { })';
+                    window.location.href = url;
+                });
             }
 
 
