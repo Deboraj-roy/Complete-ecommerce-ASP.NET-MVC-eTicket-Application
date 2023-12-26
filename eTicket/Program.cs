@@ -52,6 +52,7 @@ try
 
     //Seed Database
     AppDbInitializer.Seed(app);
+    AppDbInitializer.SeedUsersAndRolesAsync(app).Wait();
 
     app.Run();
 
