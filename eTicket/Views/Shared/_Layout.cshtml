@@ -13,7 +13,7 @@
     <link rel="shortcut icon" href="~/Images/eTicket-title_2.png" type="image/x-icon">
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
-     
+
     <!-- Toastr Notification -->
 
     <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/toastr.js/latest/css/toastr.min.css" />
@@ -41,11 +41,11 @@
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-controller="Movies" asp-action="Index"><i class="bi bi-film"></i> Movies</a>
                         </li>
-                        @* 
+                        @*
                         <a class="nav-link text-dark" asp-area="" asp-controller="Cinemas" asp-action="Index"><i class="bi bi-camera-reels"></i> Cinemas</a>
                         <a class="nav-link text-dark" asp-area="" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
                         <a class="nav-link text-dark" asp-area="" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
-                         *@
+                        *@
                         <li class="nav-item dropdown">
                             <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                 <i class="bi bi-gear"></i> Management
@@ -56,7 +56,7 @@
                                 <a class="dropdown-item" asp-controller="Producers" asp-action="Index"><i class="bi bi-headset"></i> Producers</a>
                                 <a class="dropdown-item" asp-controller="Actors" asp-action="Index"><i class="bi bi-person-square"></i> Actors</a>
                             </div>
-                        </li> 
+                        </li>
 
                     </ul>
 
@@ -65,10 +65,14 @@
                         <input name="searchString" type="text" class="form-control" placeholder="Search for a movie..." aria-label="Recipient's username" aria-describedby="button-addon2">
                         <button class="btn btn-outline-success my-2 my-sm-0" type="submit"><i class="bi bi-search"></i></button>
                     </form>
-                     
+
                     <ul class="navbar-nav">
                         @await Component.InvokeAsync("ShoppingCartSummary")
                     </ul>
+
+                    <a class="btn btn-outline-success my-sm-0" asp-controller="Account" asp-action="Login">
+                        <i class="bg bi-box-arrow-in-right"></i> Log In
+                    </a>
 
                     @*User profile section*@
                     <div class="dropdown">

@@ -35,7 +35,7 @@ try
     builder.Services.AddScoped(sc => ShoppingCart.GetShoppingCart(sc));
 
     //Authentication and authorization
-    builder.Services.AddIdentity<ApplicationUser,IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
+    builder.Services.AddIdentity<ApplicationUser, IdentityRole>().AddEntityFrameworkStores<AppDbContext>();
     builder.Services.AddMemoryCache();
     builder.Services.AddSession();
     builder.Services.AddAuthentication(option =>

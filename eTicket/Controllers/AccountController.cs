@@ -1,4 +1,5 @@
 ﻿using eTicket.Data;
+using eTicket.Data.ViewModels;
 using eTicket.Models;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -21,11 +22,11 @@ namespace eTicket.Controllers
             _logger = logger;
         }  
 
-        public IActionResult Index()
+        public IActionResult Login()
         {
             _logger.LogInformation("I am in Account Controller.");
 
-            return View();
+            return View(new LoginVM());
         }
     }
 }
