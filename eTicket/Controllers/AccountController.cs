@@ -24,7 +24,7 @@ namespace eTicket.Controllers
 
         public IActionResult Login()
         {
-            _logger.LogInformation("I am in Account Controller.");
+            _logger.LogInformation("I am in Account Controller: Login");
 
             return View(new LoginVM());
         }
@@ -59,5 +59,14 @@ namespace eTicket.Controllers
             return View(loginVM);
 
         }
+
+
+        public IActionResult Register()
+        {
+            _logger.LogInformation("I am in Account Controller: Register");
+
+            return View(new RegisterVM());
+        }
+
     }
 }
