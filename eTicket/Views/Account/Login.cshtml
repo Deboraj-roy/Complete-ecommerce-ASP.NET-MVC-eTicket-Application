@@ -10,6 +10,12 @@
             <h4>Log in to your account</h4>
         </p>
 
+        @if (TempData["LoinError"] != null)
+        {
+            <div class="col-md-12 alert alert-danger">
+                <span><b>Sorry!</b> - @TempData["LoinError"]</span>
+                </div>
+        }
         <div class="row">
             <div class="col-md-8 offset-2">
                 <form asp-controller="Account" asp-action="Login" asp-antiforgery="true">
