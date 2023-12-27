@@ -23,24 +23,24 @@
 
                     <div class="form-group">
                         <label asp-for="FullName" class="control-label"></label>
-                        <input asp-for="FullName" class="form-control" />
+                        <input asp-for="FullName" class="form-control" aria-required="true" placeholder="Your Full Name" required />
                         <span asp-validation-for="FullName" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="EmailAddress" class="control-label"></label>
-                        <input asp-for="EmailAddress" class="form-control" aria-required="true" placeholder="name@example.com" required/>
+                        <input asp-for="EmailAddress" class="form-control" aria-required="true" placeholder="name@domain.com" required/>
                         <span asp-validation-for="EmailAddress" class="text-danger"></span>
                     </div>
                     <div class="form-group">
                         <label asp-for="Password" class="control-label"></label>
-                        <input asp-for="Password" class="form-control" />
+                        <input asp-for="Password" class="form-control" aria-required="true" placeholder="Password" required />
                         <span asp-validation-for="Password" class="text-danger"></span>
                     </div>
 
                     <div class="form-group">
                         <label asp-for="ConfirmPassword" class="control-label"></label>
-                        <input asp-for="ConfirmPassword" class="form-control" />
+                        <input asp-for="ConfirmPassword" class="form-control" aria-required="true" placeholder="Confirm Password" required />
                         <span asp-validation-for="ConfirmPassword" class="text-danger"></span>
                     </div>
 
