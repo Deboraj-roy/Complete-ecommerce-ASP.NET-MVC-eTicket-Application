@@ -73,10 +73,12 @@
                     <a class="btn btn-outline-success my-sm-0" asp-controller="Account" asp-action="Login">
                         <i class="bg bi-box-arrow-in-right"></i> Log In
                     </a>
-                    
+                    <span style="padding: 5px;"></span>
+
                     <a class="btn btn-outline-primary my-2 my-sm-0" asp-controller="Account" asp-action="Register">
                         <i class="bi bi-person-plus"></i> Register
                     </a>
+                    <span style="padding: 5px;"></span>
 
                     @*User profile section*@
                     <div class="dropdown">
@@ -92,6 +94,13 @@
                             </li>
                         </ul>
                     </div>
+                    <span style="padding: 5px;"></span>
+
+                    <form asp-controller="Account" asp-action="Logout">
+                        <button class="btn btn-outline-danger my-sm-0" asp-controller="Account" asp-action="Logout">
+                            <i class="bg bi-box-arrow-left"></i> Log Out
+                        </button>
+                    </form>
 
                 </div>
             </div>
@@ -114,7 +123,7 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
-    
+
     @* Builtin input Validation *@
     <partial name="_ValidationScriptsPartial" />
 

@@ -89,8 +89,8 @@ namespace eTicket.Controllers
                     UserName = registerVM.EmailAddress
                 };
 
-                var newUserResponse = await _userManager.CreateAsync(newUser,registerVM.Password);
-                if (newUserResponse.Succeeded) 
+                var newUserResponse = await _userManager.CreateAsync(newUser, registerVM.Password);
+                if (newUserResponse.Succeeded)
                 {
                     await _userManager.AddToRoleAsync(newUser, UserRoles.User);
                     _logger.LogInformation($"{newUser.Email}: User Created");
@@ -106,5 +106,11 @@ namespace eTicket.Controllers
             }
         }
 
+        [HttpPost]
+        public async Task<IActionResult> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return RedirectToAction("Index", "Movies");
+        }
     }
 }
