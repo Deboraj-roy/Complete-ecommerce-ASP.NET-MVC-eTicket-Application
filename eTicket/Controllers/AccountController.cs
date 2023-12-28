@@ -1,4 +1,5 @@
 ﻿using eTicket.Data;
+using eTicket.Data.Static;
 using eTicket.Data.ViewModels;
 using eTicket.Models;
 using Microsoft.AspNetCore.Identity;
@@ -66,6 +67,43 @@ namespace eTicket.Controllers
             _logger.LogInformation("I am in Account Controller: Register");
 
             return View(new RegisterVM());
+        }
+
+        [HttpPost, ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterVM registerVM)
+        {
+            if (!ModelState.IsValid) return View(registerVM);
+            var user = await _userManager.FindByEmailAsync(registerVM.EmailAddress);
+            if (user != null)
+            {
+                TempData["RegiError"] = "The email address is already in use";
+                _logger.LogError($"{registerVM.EmailAddress}: email address is already in use");
+                return View(registerVM);
+            }
+            else
+            {
+                var newUser = new ApplicationUser()
+                {
+                    FullName = registerVM.FullName,
+                    Email = registerVM.EmailAddress,
+                    UserName = registerVM.EmailAddress
+                };
+
+                var newUserResponse = await _userManager.CreateAsync(newUser,registerVM.Password);
+                if (newUserResponse.Succeeded) 
+                {
+                    await _userManager.AddToRoleAsync(newUser, UserRoles.User);
+                    _logger.LogInformation($"{newUser.Email}: User Created");
+                    return View("RegisterCompleted");
+
+                }
+                else
+                {
+                    _logger.LogError($"{newUser.Email}: User not Created");
+                    TempData["RegiError"] = "Password Requires NonAlphanumeric: Use Strong Password";
+                    return View(registerVM);
+                }
+            }
         }
 
     }
