@@ -30,7 +30,7 @@ namespace eTicket.Controllers
             return View();
         }
 
-        [HttpPost]
+        [HttpPost, ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("Logo,Name,Description")] Cinema cinema)
         {
             if (ModelState.IsValid)
