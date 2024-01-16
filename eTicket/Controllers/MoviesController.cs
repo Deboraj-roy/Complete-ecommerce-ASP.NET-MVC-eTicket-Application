@@ -1,5 +1,6 @@
 ﻿using eTicket.Data;
 using eTicket.Data.Services.IServices;
+using eTicket.Data.Static;
 using eTicket.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -8,7 +9,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Controllers
 {
-    [Authorize]
+    [Authorize(Roles = UserRoles.Admin)]
     public class MoviesController : Controller
     {
         private readonly IMoviesService _service;
