@@ -1,11 +1,13 @@
 ﻿using eTicket.Data;
 using eTicket.Data.Services.IServices;
 using eTicket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Controllers
 {
+    [Authorize]
     public class CinemasController : Controller
     {
         private readonly ICinemaService _service;
@@ -17,6 +19,7 @@ namespace eTicket.Controllers
             _logger = logger;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             _logger.LogInformation("I am currently within the index action of the Cinemas Controller.");
@@ -47,6 +50,7 @@ namespace eTicket.Controllers
         }
 
         //Get: Cinemas/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var cinemaDetails = await _service.GetByIdAsync(id);

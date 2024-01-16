@@ -1,11 +1,13 @@
 ﻿using eTicket.Data;
 using eTicket.Data.Services.IServices;
 using eTicket.Models;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 
 namespace eTicket.Controllers
 {
+    [Authorize]
     public class ProducersController : Controller
     {
         private readonly IProducersService _service;
@@ -16,13 +18,17 @@ namespace eTicket.Controllers
             _service = service;
             _logger = logger;
         }
+
+        [AllowAnonymous]
         public async Task<IActionResult> Index()
         {
             var allProducers = await _service.GetAllAsync();
             _logger.LogInformation("I am currently within the Index action of the Producers Controller.");
             return View(allProducers);
         }
+
         //Get: Producers/Details/1
+        [AllowAnonymous]
         public async Task<IActionResult> Details(int id)
         {
             var producerDetails = await _service.GetByIdAsync(id);
