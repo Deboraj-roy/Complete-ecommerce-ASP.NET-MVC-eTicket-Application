@@ -1,27 +1,12 @@
 # eTicket ASP.NET MVC Project
 
-Welcome to the eTicket ASP.NET MVC project repository! This project is part of the learning journey undertaken through the Udemy course "ASP.NET CORE MVC | Build a Complete eCommerce App." The main focus of this project is to apply the concepts learned in the course to create a fast and secure eCommerce application using ASP.NET MVC and Entity Framework Core. You can explore the live project [here](https://eticketby.azurewebsites.net/).
-<br>
-<hr>
-
-![Certificate](https://udemy-certificate.s3.amazonaws.com/image/UC-0bf7939d-d0a8-4b9f-b6aa-670b692b9cc8.jpg)
-<br>
-
-## Course Information
-
-- **Course Title:** ASP.NET CORE MVC | Build a Complete eCommerce App
-- **Instructor:** [Instructor Name]
-- **Course Link:** [Udemy Course Link](https://www.udemy.com/course/complete-ecommerce-aspnet-mvc-application/)
-
 ## Live Project
 
 Check out the live version of the eTicket ASP.NET MVC project: [eTicket Live Project](https://eticketby.azurewebsites.net/)
 
 
 ## Project Overview
-
-The eTicket ASP.NET MVC project is designed to demonstrate the practical implementation of the concepts covered in the Udemy course. The goal is to build a fully functional eCommerce application using ASP.NET MVC and Entity Framework Core. This project will cover various aspects of web development, including:
-
+ 
 - **MVC Architecture:** Understanding and implementing the Model-View-Controller pattern for a well-organized and maintainable codebase.
   
 - **Entity Framework Core:** Leveraging the power of Entity Framework Core for efficient database operations, including data retrieval, modification, and storage.
