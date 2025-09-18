@@ -2,7 +2,7 @@
 
 ## Live Project
 
-Check out the live version of the eTicket ASP.NET MVC project: [eTicket Live Project](http://www.eticket.somee.com/)
+Check out the live version of the eTicket ASP.NET MVC project: [eTicket Live Project](http://eticket.runasp.net/)
 
 
 ## Project Overview
