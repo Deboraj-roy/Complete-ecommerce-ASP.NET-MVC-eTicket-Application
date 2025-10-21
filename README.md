@@ -41,6 +41,15 @@ Follow these steps to get the project up and running on your local machine:
 
    The application should now be accessible at `http://localhost:5000` (or `https://localhost:5001`).
 
+
+<br>
+
+## Certificate
+<hr>
+
+![Certificate](https://udemy-certificate.s3.amazonaws.com/image/UC-0bf7939d-d0a8-4b9f-b6aa-670b692b9cc8.jpg)
+<br>
+
 ## Contributions
 
 Contributions to the project are welcome! If you have any ideas, improvements, or bug fixes, feel free to open an issue or submit a pull request.
